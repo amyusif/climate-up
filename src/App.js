@@ -1,11 +1,39 @@
 import React from "react";
 import Searchbar from "./components/Search/Searchbar";
+import LoopCloud from "./Assets/Cloud.mp4";
+import "./Styles/App.css";
+import { HiMenuAlt1 } from "react-icons/hi";
+import { StyledCard } from "./components/Styled/Components.styled";
+import Current from "./components/CurrentWeather/Current";
 
 function App() {
-  return( 
-  <div>
-  <Searchbar />
-  </div>
+
+  const searchChange = (seachData) => {
+    console.log(seachData);
+  }
+  return (
+    <div className="container">
+      <video autoPlay muted loop>
+        <source src={LoopCloud} type="video/mp4" />
+      </video>
+      <div className="ui-container">
+        <div className="top">
+          <div className="icon">
+            <HiMenuAlt1 className="icon" />
+          </div>
+          <Searchbar onHanleChange={searchChange}/>
+        </div>
+        <div className="upper-mid">
+        <Current />
+        </div>
+        <div className="mid">
+          <StyledCard />
+        </div>
+        <div className="bot">
+          <StyledCard />
+        </div>
+      </div>
+    </div>
   );
 }
 
