@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Searchbar from "./components/Search/Searchbar";
 import LoopCloud from "./Assets/Cloud.mp4";
 import "./Styles/App.css";
@@ -8,8 +8,10 @@ import Current from "./components/CurrentWeather/Current";
 
 function App() {
 
-  const searchChange = (seachData) => {
-    console.log(seachData);
+  
+
+  const searchChange = (searchData) => {
+    console.log(searchData);
   }
   return (
     <div className="container">
@@ -21,7 +23,7 @@ function App() {
           <div className="icon">
             <HiMenuAlt1 className="icon" />
           </div>
-          <Searchbar onHanleChange={searchChange}/>
+          <Searchbar onHandleChange={searchChange}/>
         </div>
         <div className="upper-mid">
         <Current />
