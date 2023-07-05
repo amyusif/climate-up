@@ -3,6 +3,7 @@ import "./Search.css";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { Geo_Api_Option, GEO_URL } from "../../Api/Api";
 
+// eslint-disable-next-line react/prop-types
 const Searchbar = ({ onHandleChange }) => {
   const [search, setSearch] = useState(null);
 
@@ -12,14 +13,14 @@ const Searchbar = ({ onHandleChange }) => {
   };
   const loadOptions = (inputValue) => {
     return fetch(
-      `${GEO_URL}?minPopulation=1000000&namePrefix=${inputValue}`,
+      `${GEO_URL}?namePrefix=${inputValue}`,
       Geo_Api_Option
     )
       .then((response) => response.json())
       .then((response) => {
         return {
           options: response.data.map((city) => ({
-            value: `${city.latitude} - ${city.longitude}`,
+            value: `${city.latitude} ${city.longitude}`,
             label: `${city.name}, ${city.countryCode}`,
           })),
         };
@@ -28,13 +29,15 @@ const Searchbar = ({ onHandleChange }) => {
 
   return (
     <div className="search">
-      <AsyncPaginate
-        value={search}
-        placeholder="Seach for a city"
-        onChange={handleChange}
-        loadOptions={loadOptions}
-        debounceTimeout={600}
-      />
+    <div className="search-container"> 
+    <AsyncPaginate
+      value={search}
+      placeholder="Seach for a city"
+      onChange={handleChange}
+      loadOptions={loadOptions}
+      debounceTimeout={600}
+    />
+    </div>
     </div>
   );
 };

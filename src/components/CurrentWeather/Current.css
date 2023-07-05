@@ -8,3 +8,6 @@
 .current-weather > *{
     color: #e0dddd;
 }
+.celsius{
+    font-size: 40px;
+}
