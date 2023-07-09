@@ -1,5 +1,4 @@
-export const GEO_URL =
-'https://wft-geo-db.p.rapidapi.com/v1/geo/cities';
+export const GEO_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities";
 export const Geo_Api_Option = {
   method: "GET",
   headers: {
@@ -8,8 +7,9 @@ export const Geo_Api_Option = {
   },
 };
 
-
 export const API_KEY = "8dc1c762af760285b260ded5c90fbd40";
 
-export const forcast_Api = "https://api.openweathermap.org/data/2.5/"
-export const weather_Api = "https://api.openweathermap.org/data/2.5/"
+export const weather_Api = "https://api.openweathermap.org/data/2.5/weather";
+export const forcast_Api = "https://api.openweathermap.org/data/2.5/forecast";
+export const big_Data_Api =
+  "https://api.bigdatacloud.net/data/reverse-geocode-client";

@@ -3,7 +3,6 @@ import "./Search.css";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { Geo_Api_Option, GEO_URL } from "../../Api/Api";
 
-// eslint-disable-next-line react/prop-types
 const Searchbar = ({ onHandleChange }) => {
   const [search, setSearch] = useState(null);
 
