@@ -3,13 +3,18 @@ import Searchbar from "./components/Search/Searchbar";
 import LoopCloud from "./Assets/Cloud.mp4";
 import "./Styles/App.css";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { StyledCard } from "./components/Styled/Components.styled";
+import {
+  StyledCard,
+  VideoBG,
+  Wrapper,
+  AppUI
+} from "./components/Styled/Global_Styles/Components.styled";
 import Current from "./components/CurrentWeather/Current";
 import { API_KEY, weather_Api, forcast_Api, big_Data_Api } from "./Api/Api";
 import HourForcast from "./components/HourForcast/HourForcast";
 import DaysForcast from "./components/DaysForcast/DaysForcast";
 
-function App() {
+const App = () => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [weatherForcast, setWeatherFocast] = useState(null);
 
@@ -60,9 +65,7 @@ function App() {
           city: district + " " + muni,
           ...current_weather_res,
         });
-        setWeatherFocast(
-          newForcastList
-        );
+        setWeatherFocast(newForcastList);
       });
     });
   };
@@ -82,55 +85,48 @@ function App() {
         const weather_Response = await response[0].json();
         const forcast_Response = await response[1].json();
 
-        const forcastList = forcast_Response.list;
-        console.log(forcastList);
-
-        const hourArray = forcast_Response.list.map((item) => {
+        const newForcaster = forcast_Response.list.map((item) => {
           const [date, time] = item.dt_txt.split(" ");
           const [hours, minutes, secs] = time.split(":");
           const _12hour = hours >= 12 ? `${hours % 12}pm` : `${hours}am`;
 
-          return _12hour;
+          return {
+            time: _12hour,
+            ...item,
+          };
         });
 
         setCurrentWeather({
-          hours: hourArray,
           city: searchData.label,
           ...weather_Response,
         });
-        setWeatherFocast({ city: searchData.label, ...forcast_Response });
+        setWeatherFocast(newForcaster);
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className="container">
-      <video autoPlay muted loop>
+    <Wrapper>
+      <VideoBG autoPlay muted loop>
         <source src={LoopCloud} type="video/mp4" />
-      </video>
-      <div className="ui-container">
+      </VideoBG>
+      <AppUI>
         <div className="top">
           <div className="icon">
             <HiMenuAlt1 className="icon" />
           </div>
           <Searchbar onHandleChange={searchChange} />
         </div>
-        <div className="upper-mid">
-          {currentWeather && <Current data={currentWeather} />}
-        </div>
-        <div className="mid">
+        {currentWeather && <Current data={currentWeather} />}
+        <StyledCard>
+          {weatherForcast && <HourForcast data={weatherForcast} />}
+        </StyledCard>
           <StyledCard>
-            {weatherForcast && <HourForcast data={weatherForcast} />}
+            {weatherForcast && <DaysForcast data={weatherForcast} />}
           </StyledCard>
-        </div>
-        <div className="bot">
-          <StyledCard>
-          <DaysForcast />
-          </StyledCard>
-        </div>
-      </div>
-    </div>
+      </AppUI>
+    </Wrapper>
   );
-}
+};
 
 export default App;
