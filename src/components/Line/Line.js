@@ -4,7 +4,7 @@ import "./Line.css";
 
 const LineForcast = ({ dataFetch }) => {
 
-  const useData = dataFetch.slice(0, 8)
+  const useData = dataFetch.slice(0, 7)
 
   const lineData = [
     {

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    height: 20%;
 }
 .current-weather > *{
     color: #e0dddd;

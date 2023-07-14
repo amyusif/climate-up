@@ -3,7 +3,6 @@ import "./Hour.css";
 import LineForcast from "../Line/Line";
 
 const HourForcast = ({ data }) => {
-  console.log(data);
 
   return (
     <div className="hour">
