@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "./components/Search/Searchbar";
 import LoopCloud from "./Assets/Cloud.mp4";
 import "./Styles/App.css";
-import { HiMenuAlt1 } from "react-icons/hi";
 import {
   StyledCard,
   VideoBG,
   Wrapper,
-  AppUI
+  AppUI,
+  Upper
 } from "./components/Styled/Global_Styles/Components.styled";
 import Current from "./components/CurrentWeather/Current";
 import { API_KEY, weather_Api, forcast_Api, big_Data_Api } from "./Api/Api";
@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     defaultLoc();
   }, []);
-
+  
   const defaultLoc = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const geoLat = position.coords.latitude;
@@ -57,8 +57,6 @@ const App = () => {
           };
         });
 
-        console.log(newForcastList);
-
         const [district, muni] = current_city_res.locality.split(" ");
 
         setCurrentWeather({
@@ -69,6 +67,7 @@ const App = () => {
       });
     });
   };
+
 
   const searchChange = (searchData) => {
     const [lat, lon] = searchData.value.split(" ");
@@ -111,12 +110,9 @@ const App = () => {
         <source src={LoopCloud} type="video/mp4" />
       </VideoBG>
       <AppUI>
-        <div className="top">
-          <div className="icon">
-            <HiMenuAlt1 className="icon" />
-          </div>
+        <Upper>
           <Searchbar onHandleChange={searchChange} />
-        </div>
+        </Upper>
         {currentWeather && <Current data={currentWeather} />}
         <StyledCard>
           {weatherForcast && <HourForcast data={weatherForcast} />}
